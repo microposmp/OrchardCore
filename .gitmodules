@@ -1,0 +1,3 @@
+[submodule "src/OrchardCore.Modules/OrchardCore.Commerce"]
+	path = src/OrchardCore.Modules/OrchardCore.Commerce
+	url = https://github.com/microposmp/OrchardCore.Commerce.git
