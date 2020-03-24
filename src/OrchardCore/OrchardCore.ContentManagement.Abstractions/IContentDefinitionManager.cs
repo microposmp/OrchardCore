@@ -60,6 +60,14 @@ namespace OrchardCore.ContentManagement.Metadata
             manager.StorePartDefinition(builder.Build());
         }
 
+        public static void AlterPartDefinition(this IContentDefinitionManager manager, string name, string feature, Action<ContentPartDefinitionBuilder> alteration)
+        {
+            var partDefinition = manager.LoadPartDefinition(name) ?? new ContentPartDefinition(name, feature);
+            var builder = new ContentPartDefinitionBuilder(partDefinition);
+            alteration(builder);
+            manager.StorePartDefinition(builder.Build());
+        }
+
         /// <summary>
         /// Migrate existing ContentPart settings to WithSettings<typeparamref name="TSettings"/>
         /// This method will be removed in a future release.

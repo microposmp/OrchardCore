@@ -32,12 +32,14 @@ namespace OrchardCore.ContentManagement.Metadata.Builders
             else
             {
                 Name = existing.Name;
+                Feature = existing.Feature;
                 _fields = existing.Fields.ToList();
                 _settings = new JObject(existing.Settings);
             }
         }
 
         public string Name { get; private set; }
+        public string Feature { get; private set; }
 
         public ContentPartDefinition Build()
         {
@@ -50,7 +52,7 @@ namespace OrchardCore.ContentManagement.Metadata.Builders
                 throw new ArgumentException("Content type name contains invalid characters", "name");
             }
 
-            return new ContentPartDefinition(Name, _fields, _settings);
+            return new ContentPartDefinition(Name, Feature, _fields, _settings);
         }
 
         public ContentPartDefinitionBuilder Named(string name)
