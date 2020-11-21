@@ -8,6 +8,7 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 jobs:
   build_test:
+    if: github.repository == 'OrchardCMS/OrchardCore'
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
