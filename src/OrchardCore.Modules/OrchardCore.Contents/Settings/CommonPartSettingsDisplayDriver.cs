@@ -9,7 +9,7 @@ using OrchardCore.DisplayManagement.Views;
 
 namespace OrchardCore.Lists.Settings
 {
-    public class CommonPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class CommonPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<CommonPart>
     {
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
@@ -18,7 +18,7 @@ namespace OrchardCore.Lists.Settings
                 return null;
             }
 
-            return Initialize<CommonPartSettingsViewModel>("CommonPartSettings_Edit", model =>
+            return Initialize<CommonPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var settings = contentTypePartDefinition.GetSettings<CommonPartSettings>();
                 model.DisplayDateEditor = settings.DisplayDateEditor;

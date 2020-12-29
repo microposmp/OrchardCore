@@ -10,7 +10,7 @@ using OrchardCore.Liquid;
 
 namespace OrchardCore.Alias.Settings
 {
-    public class AliasPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class AliasPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<AliasPart>
     {
         private readonly ILiquidTemplateManager _templateManager;
         private readonly IStringLocalizer S;
@@ -28,7 +28,7 @@ namespace OrchardCore.Alias.Settings
                 return null;
             }
 
-            return Initialize<AliasPartSettingsViewModel>("AliasPartSettings_Edit", model =>
+            return Initialize<AliasPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var settings = contentTypePartDefinition.GetSettings<AliasPartSettings>();
 

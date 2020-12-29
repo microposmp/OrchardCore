@@ -9,7 +9,7 @@ using OrchardCore.Html.ViewModels;
 
 namespace OrchardCore.Html.Settings
 {
-    public class HtmlBodyPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class HtmlBodyPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<HtmlBodyPart>
     {
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
@@ -18,7 +18,7 @@ namespace OrchardCore.Html.Settings
                 return null;
             }
 
-            return Initialize<HtmlBodyPartSettingsViewModel>("HtmlBodyPartSettings_Edit", model =>
+            return Initialize<HtmlBodyPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var settings = contentTypePartDefinition.GetSettings<HtmlBodyPartSettings>();
 

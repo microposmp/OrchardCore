@@ -11,7 +11,7 @@ using OrchardCore.Liquid;
 
 namespace OrchardCore.Autoroute.Settings
 {
-    public class AutoroutePartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class AutoroutePartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<AutoroutePart>
     {
         private readonly ILiquidTemplateManager _templateManager;
         private readonly IStringLocalizer S;
@@ -29,7 +29,7 @@ namespace OrchardCore.Autoroute.Settings
                 return null;
             }
 
-            return Initialize<AutoroutePartSettingsViewModel>("AutoroutePartSettings_Edit", model =>
+            return Initialize<AutoroutePartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var settings = contentTypePartDefinition.GetSettings<AutoroutePartSettings>();
 

@@ -9,7 +9,7 @@ using OrchardCore.Markdown.ViewModels;
 
 namespace OrchardCore.Markdown.Settings
 {
-    public class MarkdownBodyPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class MarkdownBodyPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<MarkdownBodyPart>
     {
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
@@ -18,7 +18,7 @@ namespace OrchardCore.Markdown.Settings
                 return null;
             }
 
-            return Initialize<MarkdownBodyPartSettingsViewModel>("MarkdownBodyPartSettings_Edit", model =>
+            return Initialize<MarkdownBodyPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
                 {
                     var settings = contentTypePartDefinition.GetSettings<MarkdownBodyPartSettings>();
 

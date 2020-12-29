@@ -13,7 +13,7 @@ using OrchardCore.Lists.ViewModels;
 
 namespace OrchardCore.Lists.Settings
 {
-    public class ListPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class ListPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<ListPart>
     {
         private readonly IContentDefinitionManager _contentDefinitionManager;
         private readonly IContainerService _containerService;
@@ -36,7 +36,7 @@ namespace OrchardCore.Lists.Settings
                 return null;
             }
 
-            return Initialize<ListPartSettingsViewModel>("ListPartSettings_Edit", model =>
+            return Initialize<ListPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.ListPartSettings = contentTypePartDefinition.GetSettings<ListPartSettings>();
                 model.PageSize = model.ListPartSettings.PageSize;

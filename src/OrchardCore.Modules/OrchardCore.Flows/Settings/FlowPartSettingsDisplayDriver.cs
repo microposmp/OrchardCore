@@ -14,7 +14,7 @@ using OrchardCore.Flows.ViewModels;
 
 namespace OrchardCore.Flows.Settings
 {
-    public class FlowPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class FlowPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<FlowPart>
     {
         private readonly IContentDefinitionManager _contentDefinitionManager;
         private readonly IStringLocalizer S;
@@ -34,7 +34,7 @@ namespace OrchardCore.Flows.Settings
                 return null;
             }
 
-            return Initialize<FlowPartSettingsViewModel>("FlowPartSettings_Edit", model =>
+            return Initialize<FlowPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.FlowPartSettings = contentTypePartDefinition.GetSettings<FlowPartSettings>();
                 model.ContainedContentTypes = model.FlowPartSettings.ContainedContentTypes;

@@ -11,7 +11,7 @@ using OrchardCore.Liquid;
 
 namespace OrchardCore.ContentPreview.Settings
 {
-    public class PreviewPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class PreviewPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<PreviewPart>
     {
         private readonly ILiquidTemplateManager _templateManager;
         private readonly IStringLocalizer S;
@@ -29,7 +29,7 @@ namespace OrchardCore.ContentPreview.Settings
                 return null;
             }
 
-            return Initialize<PreviewPartSettingsViewModel>("PreviewPartSettings_Edit", model =>
+            return Initialize<PreviewPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var settings = contentTypePartDefinition.GetSettings<PreviewPartSettings>();
 

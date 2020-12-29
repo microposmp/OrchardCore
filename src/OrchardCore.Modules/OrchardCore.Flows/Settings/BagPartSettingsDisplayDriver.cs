@@ -12,7 +12,7 @@ using OrchardCore.Flows.ViewModels;
 
 namespace OrchardCore.Flows.Settings
 {
-    public class BagPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class BagPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<BagPart>
     {
         private readonly IContentDefinitionManager _contentDefinitionManager;
         private readonly IStringLocalizer S;
@@ -32,7 +32,7 @@ namespace OrchardCore.Flows.Settings
                 return null;
             }
 
-            return Initialize<BagPartSettingsViewModel>("BagPartSettings_Edit", model =>
+            return Initialize<BagPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.BagPartSettings = contentTypePartDefinition.GetSettings<BagPartSettings>();
                 model.ContainedContentTypes = model.BagPartSettings.ContainedContentTypes;

@@ -10,7 +10,7 @@ using OrchardCore.Liquid;
 
 namespace OrchardCore.Facebook.Widgets.Settings
 {
-    public class FacebookPluginPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class FacebookPluginPartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<FacebookPluginPart>
     {
         private readonly ILiquidTemplateManager _templateManager;
         private readonly IStringLocalizer S;
@@ -28,7 +28,7 @@ namespace OrchardCore.Facebook.Widgets.Settings
                 return null;
             }
 
-            return Initialize<FacebookPluginPartSettingsViewModel>("FacebookPluginPartSettings_Edit", model =>
+            return Initialize<FacebookPluginPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.FacebookPluginPartSettings = contentTypePartDefinition.GetSettings<FacebookPluginPartSettings>();
                 model.Liquid = model.FacebookPluginPartSettings.Liquid;

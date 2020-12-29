@@ -11,7 +11,7 @@ using OrchardCore.Title.ViewModels;
 
 namespace OrchardCore.Title.Settings
 {
-    public class TitlePartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver
+    public class TitlePartSettingsDisplayDriver : ContentTypePartDefinitionDisplayDriver<TitlePart>
     {
         private readonly ILiquidTemplateManager _templateManager;
         private readonly IStringLocalizer S;
@@ -29,7 +29,7 @@ namespace OrchardCore.Title.Settings
                 return null;
             }
 
-            return Initialize<TitlePartSettingsViewModel>("TitlePartSettings_Edit", model =>
+            return Initialize<TitlePartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var settings = contentTypePartDefinition.GetSettings<TitlePartSettings>();
 
