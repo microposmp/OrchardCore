@@ -12,11 +12,6 @@ namespace OrchardCore.Markdown.Settings
     {
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             return Initialize<MarkdownBodyPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
                 {
                     var settings = contentTypePartDefinition.GetSettings<MarkdownBodyPartSettings>();
@@ -28,11 +23,6 @@ namespace OrchardCore.Markdown.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             var model = new MarkdownBodyPartSettingsViewModel();
             var settings = new MarkdownBodyPartSettings();
 

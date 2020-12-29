@@ -30,11 +30,6 @@ namespace OrchardCore.Lists.Settings
 
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             return Initialize<ListPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.ListPartSettings = contentTypePartDefinition.GetSettings<ListPartSettings>();
@@ -52,10 +47,6 @@ namespace OrchardCore.Lists.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
             var settings = contentTypePartDefinition.GetSettings<ListPartSettings>();
 
             var model = new ListPartSettingsViewModel();

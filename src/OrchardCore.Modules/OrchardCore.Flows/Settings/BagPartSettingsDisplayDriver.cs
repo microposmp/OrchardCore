@@ -26,11 +26,6 @@ namespace OrchardCore.Flows.Settings
 
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             return Initialize<BagPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.BagPartSettings = contentTypePartDefinition.GetSettings<BagPartSettings>();
@@ -47,11 +42,6 @@ namespace OrchardCore.Flows.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             var model = new BagPartSettingsViewModel();
 
             await context.Updater.TryUpdateModelAsync(model, Prefix, m => m.ContainedContentTypes, m => m.DisplayType);

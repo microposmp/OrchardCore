@@ -22,11 +22,6 @@ namespace OrchardCore.Facebook.Widgets.Settings
 
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             return Initialize<FacebookPluginPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.FacebookPluginPartSettings = contentTypePartDefinition.GetSettings<FacebookPluginPartSettings>();
@@ -36,11 +31,6 @@ namespace OrchardCore.Facebook.Widgets.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             var model = new FacebookPluginPartSettingsViewModel();
 
             await context.Updater.TryUpdateModelAsync(model, Prefix,

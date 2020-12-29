@@ -1,4 +1,5 @@
 using System;
+using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Metadata.Models;
 using OrchardCore.DisplayManagement.Handlers;
 
@@ -29,7 +30,7 @@ namespace OrchardCore.ContentTypes.Editors
     /// A concrete implementation of <see cref="ContentTypePartDefinitionDisplayDriver&lt;TPart&gt;"/> provides a driver for part definitions
     /// of the type <c>TPart</c>.
     /// </summary>
-    public abstract class ContentTypePartDefinitionDisplayDriver<TPart> : ContentTypePartDefinitionDisplayDriver
+    public abstract class ContentTypePartDefinitionDisplayDriver<TPart> : ContentTypePartDefinitionDisplayDriver where TPart : ContentPart
     {
         public override bool CanHandleModel(ContentTypePartDefinition model)
         {

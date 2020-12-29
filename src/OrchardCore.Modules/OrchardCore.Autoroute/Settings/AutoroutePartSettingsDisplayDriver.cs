@@ -23,11 +23,6 @@ namespace OrchardCore.Autoroute.Settings
 
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             return Initialize<AutoroutePartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var settings = contentTypePartDefinition.GetSettings<AutoroutePartSettings>();
@@ -46,11 +41,6 @@ namespace OrchardCore.Autoroute.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             var model = new AutoroutePartSettingsViewModel();
 
             await context.Updater.TryUpdateModelAsync(model, Prefix,

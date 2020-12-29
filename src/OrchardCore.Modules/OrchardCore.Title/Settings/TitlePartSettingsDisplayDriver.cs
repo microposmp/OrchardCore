@@ -23,11 +23,6 @@ namespace OrchardCore.Title.Settings
 
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             return Initialize<TitlePartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var settings = contentTypePartDefinition.GetSettings<TitlePartSettings>();
@@ -41,11 +36,6 @@ namespace OrchardCore.Title.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             var model = new TitlePartSettingsViewModel();
 
             await context.Updater.TryUpdateModelAsync(model, Prefix,

@@ -22,11 +22,6 @@ namespace OrchardCore.Alias.Settings
 
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             return Initialize<AliasPartSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var settings = contentTypePartDefinition.GetSettings<AliasPartSettings>();
@@ -39,11 +34,6 @@ namespace OrchardCore.Alias.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!CanHandleModel(contentTypePartDefinition))
-            {
-                return null;
-            }
-
             var model = new AliasPartSettingsViewModel();
 
             if (await context.Updater.TryUpdateModelAsync(model, Prefix, m => m.Pattern, m => m.Options))
