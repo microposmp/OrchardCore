@@ -49,7 +49,7 @@ namespace OrchardCore.Taxonomies.Settings
                 IsChecked = settings.TaxonomyContentItemIds.Any(id => String.Equals(x.ContentItemId, id, StringComparison.OrdinalIgnoreCase))
             }).ToArray();
 
-            return Initialize<TaxonomyContentsAdminListSettingsViewModel>("TaxonomyContentsAdminListSettings_Edit", model =>
+            return Initialize<TaxonomyContentsAdminListSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.TaxonomyEntries = entries;
             }).Location("Content:2").OnGroup(GroupId);

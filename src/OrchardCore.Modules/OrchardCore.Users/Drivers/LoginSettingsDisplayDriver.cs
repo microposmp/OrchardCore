@@ -31,7 +31,7 @@ namespace OrchardCore.Users.Drivers
                 return null;
             }
 
-            return Initialize<LoginSettings>("LoginSettings_Edit", model =>
+            return Initialize<LoginSettings>(GetSettingsEditorShapeType(), model =>
             {
                 model.UseSiteTheme = settings.UseSiteTheme;
                 model.UseExternalProviderIfOnlyOneDefined = settings.UseExternalProviderIfOnlyOneDefined;

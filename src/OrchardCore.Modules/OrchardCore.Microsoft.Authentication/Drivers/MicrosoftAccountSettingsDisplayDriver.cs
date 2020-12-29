@@ -42,7 +42,7 @@ namespace OrchardCore.Microsoft.Authentication.Drivers
                 return null;
             }
 
-            return Initialize<MicrosoftAccountSettingsViewModel>("MicrosoftAccountSettings_Edit", model =>
+            return Initialize<MicrosoftAccountSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.AppId = settings.AppId;
                 if (!string.IsNullOrWhiteSpace(settings.AppSecret))

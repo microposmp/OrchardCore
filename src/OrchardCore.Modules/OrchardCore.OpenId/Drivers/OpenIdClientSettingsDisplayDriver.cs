@@ -53,7 +53,7 @@ namespace OrchardCore.OpenId.Drivers
                 return null;
             }
 
-            return Initialize<OpenIdClientSettingsViewModel>("OpenIdClientSettings_Edit", model =>
+            return Initialize<OpenIdClientSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.DisplayName = settings.DisplayName;
                 model.Scopes = settings.Scopes != null ? string.Join(" ", settings.Scopes) : null;

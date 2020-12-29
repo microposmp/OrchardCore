@@ -32,7 +32,7 @@ namespace OrchardCore.ContentLocalization.Drivers
                 return null;
             }
 
-            return Initialize<ContentCulturePickerSettings>("ContentCulturePickerSettings_Edit", model =>
+            return Initialize<ContentCulturePickerSettings>(GetSettingsEditorShapeType(), model =>
             {
                 model.SetCookie = settings.SetCookie;
                 model.RedirectToHomepage = settings.RedirectToHomepage;

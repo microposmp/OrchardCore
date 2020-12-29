@@ -31,7 +31,7 @@ namespace OrchardCore.Google.Analytics.Drivers
                 return null;
             }
 
-            return Initialize<GoogleAnalyticsSettingsViewModel>("GoogleAnalyticsSettings_Edit", model =>
+            return Initialize<GoogleAnalyticsSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.TrackingID = settings.TrackingID;
             }).Location("Content:5").OnGroup(GoogleConstants.Features.GoogleAnalytics);

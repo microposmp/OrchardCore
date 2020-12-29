@@ -42,7 +42,7 @@ namespace OrchardCore.GitHub.Drivers
                 return null;
             }
 
-            return Initialize<GitHubAuthenticationSettingsViewModel>("GitHubAuthenticationSettings_Edit", model =>
+            return Initialize<GitHubAuthenticationSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.ClientID = settings.ClientID;
                 if (!string.IsNullOrWhiteSpace(settings.ClientSecret))

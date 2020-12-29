@@ -13,7 +13,7 @@ namespace OrchardCore.Workflows.Drivers
     {
         public override IDisplayResult Edit(ActivityMetadata section, BuildEditorContext context)
         {
-            return Initialize<ActivityMetadataEditViewModel>("ActivityMetadata_Edit", viewModel =>
+            return Initialize<ActivityMetadataEditViewModel>(GetSettingsEditorShapeType(), viewModel =>
             {
                 viewModel.Title = section.Title;
             }).Location("Content:before");

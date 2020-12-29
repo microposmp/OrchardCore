@@ -42,7 +42,7 @@ namespace OrchardCore.Google.Authentication.Drivers
                 return null;
             }
 
-            return Initialize<GoogleAuthenticationSettingsViewModel>("GoogleAuthenticationSettings_Edit", model =>
+            return Initialize<GoogleAuthenticationSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.ClientID = settings.ClientID;
                 if (!string.IsNullOrWhiteSpace(settings.ClientSecret))

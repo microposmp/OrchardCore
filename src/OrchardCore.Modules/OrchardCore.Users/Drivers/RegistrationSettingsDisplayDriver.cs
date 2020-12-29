@@ -33,7 +33,7 @@ namespace OrchardCore.Users.Drivers
                 return null;
             }
 
-            return Initialize<RegistrationSettings>("RegistrationSettings_Edit", model =>
+            return Initialize<RegistrationSettings>(GetSettingsEditorShapeType(), model =>
             {
                 model.UsersCanRegister = settings.UsersCanRegister;
                 model.UsersMustValidateEmail = settings.UsersMustValidateEmail;

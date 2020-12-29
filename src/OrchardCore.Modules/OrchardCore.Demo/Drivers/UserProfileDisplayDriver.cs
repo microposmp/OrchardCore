@@ -24,7 +24,7 @@ namespace OrchardCore.Demo.Drivers
 
         public override IDisplayResult Edit(UserProfile profile, BuildEditorContext context)
         {
-            return Initialize<EditUserProfileViewModel>("UserProfile_Edit", model =>
+            return Initialize<EditUserProfileViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.Age = profile.Age;
                 model.FirstName = profile.FirstName;

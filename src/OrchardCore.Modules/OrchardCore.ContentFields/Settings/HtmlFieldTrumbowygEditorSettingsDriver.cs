@@ -12,6 +12,7 @@ namespace OrchardCore.ContentFields.Settings
     public class HtmlFieldTrumbowygEditorSettingsDriver : ContentPartFieldDefinitionDisplayDriver<HtmlField>
     {
         private readonly IStringLocalizer S;
+        private const string EditorType = "Trumbowyg";
 
         public HtmlFieldTrumbowygEditorSettingsDriver(IStringLocalizer<HtmlFieldTrumbowygEditorSettingsDriver> localizer)
         {
@@ -20,7 +21,7 @@ namespace OrchardCore.ContentFields.Settings
 
         public override IDisplayResult Edit(ContentPartFieldDefinition partFieldDefinition)
         {
-            return Initialize<TrumbowygSettingsViewModel>("HtmlFieldTrumbowygEditorSettings_Edit", model =>
+            return Initialize<TrumbowygSettingsViewModel>(GetSettingsEditorShapeType(EditorType), model =>
             {
                 var settings = partFieldDefinition.GetSettings<HtmlFieldTrumbowygEditorSettings>();
 
@@ -32,7 +33,7 @@ namespace OrchardCore.ContentFields.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentPartFieldDefinition partFieldDefinition, UpdatePartFieldEditorContext context)
         {
-            if (partFieldDefinition.Editor() == "Trumbowyg")
+            if (partFieldDefinition.Editor() == EditorType)
             {
                 var model = new TrumbowygSettingsViewModel();
                 var settings = new HtmlFieldTrumbowygEditorSettings();

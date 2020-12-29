@@ -40,7 +40,7 @@ namespace OrchardCore.ReCaptcha.Drivers
                 return null;
             }
 
-            return Initialize<ReCaptchaSettingsViewModel>("ReCaptchaSettings_Edit", model =>
+            return Initialize<ReCaptchaSettingsViewModel>(GetSettingsEditorShapeType(), model =>
                 {
                     model.SiteKey = settings.SiteKey;
                     model.SecretKey = settings.SecretKey;

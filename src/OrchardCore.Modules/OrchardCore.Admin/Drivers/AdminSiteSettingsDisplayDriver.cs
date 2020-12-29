@@ -33,7 +33,7 @@ namespace OrchardCore.Admin.Drivers
                 return null;
             }
 
-            return Initialize<AdminSettingsViewModel>("AdminSettings_Edit", model =>
+            return Initialize<AdminSettingsViewModel>(GetSettingsEditorShapeType(), model =>
                 {
                     model.DisplayMenuFilter = settings.DisplayMenuFilter;
                     model.DisplayDarkMode = settings.DisplayDarkMode;

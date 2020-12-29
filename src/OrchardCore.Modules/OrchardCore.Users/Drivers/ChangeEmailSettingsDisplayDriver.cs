@@ -33,7 +33,7 @@ namespace OrchardCore.Users.Drivers
                 return null;
             }
 
-            return Initialize<ChangeEmailSettings>("ChangeEmailSettings_Edit", model =>
+            return Initialize<ChangeEmailSettings>(GetSettingsEditorShapeType(), model =>
             {
                 model.AllowChangeEmail = settings.AllowChangeEmail;
             }).Location("Content:5").OnGroup(GroupId);

@@ -31,7 +31,7 @@ namespace OrchardCore.Contents.Deployment.ExportContentToDeploymentTarget
                 return null;
             }
 
-            return Initialize<ExportContentToDeploymentTargetSettingsViewModel>("ExportContentToDeploymentTargetSettings_Edit", model =>
+            return Initialize<ExportContentToDeploymentTargetSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.ExportContentToDeploymentTargetPlanId = settings.ExportContentToDeploymentTargetPlanId;
             }).Location("Content:2").OnGroup(SettingsGroupId);

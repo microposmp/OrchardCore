@@ -47,7 +47,7 @@ namespace OrchardCore.Https.Drivers
                 return null;
             }
 
-            return Initialize<HttpsSettingsViewModel>("HttpsSettings_Edit", model =>
+            return Initialize<HttpsSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var isHttpsRequest = _httpContextAccessor.HttpContext.Request.IsHttps;
 

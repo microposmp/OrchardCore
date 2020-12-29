@@ -41,7 +41,7 @@ namespace OrchardCore.ReverseProxy.Drivers
                 return null;
             }
 
-            return Initialize<ReverseProxySettingsViewModel>("ReverseProxySettings_Edit", model =>
+            return Initialize<ReverseProxySettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.EnableXForwardedFor = settings.ForwardedHeaders.HasFlag(ForwardedHeaders.XForwardedFor);
                 model.EnableXForwardedHost = settings.ForwardedHeaders.HasFlag(ForwardedHeaders.XForwardedHost);

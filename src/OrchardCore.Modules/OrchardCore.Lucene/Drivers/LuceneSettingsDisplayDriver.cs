@@ -39,7 +39,7 @@ namespace OrchardCore.Lucene.Drivers
                 return null;
             }
 
-            return Initialize<LuceneSettingsViewModel>("LuceneSettings_Edit", async model =>
+            return Initialize<LuceneSettingsViewModel>(GetSettingsEditorShapeType(), async model =>
                 {
                     model.SearchIndex = settings.SearchIndex;
                     model.SearchFields = String.Join(", ", settings.DefaultSearchFields ?? new string[0]);

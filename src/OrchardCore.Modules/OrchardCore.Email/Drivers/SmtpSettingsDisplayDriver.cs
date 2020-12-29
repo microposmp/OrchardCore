@@ -46,7 +46,7 @@ namespace OrchardCore.Email.Drivers
 
             var shapes = new List<IDisplayResult>
             {
-                Initialize<SmtpSettings>("SmtpSettings_Edit", model =>
+                Initialize<SmtpSettings>(GetSettingsEditorShapeType(), model =>
                 {
                     model.DefaultSender = settings.DefaultSender;
                     model.DeliveryMethod = settings.DeliveryMethod;

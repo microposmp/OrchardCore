@@ -38,7 +38,7 @@ namespace OrchardCore.Facebook.Login.Drivers
                 return null;
             }
 
-            return Initialize<FacebookLoginSettingsViewModel>("FacebookLoginSettings_Edit", model =>
+            return Initialize<FacebookLoginSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.CallbackPath = settings.CallbackPath.Value;
                 model.SaveTokens = settings.SaveTokens;

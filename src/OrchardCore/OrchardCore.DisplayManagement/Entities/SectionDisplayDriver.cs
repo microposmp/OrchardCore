@@ -126,5 +126,10 @@ namespace OrchardCore.DisplayManagement.Entities
                 ? property.ToObject<TSection>()
                 : new TSection();
         }
+
+        protected string GetSettingsEditorShapeType()
+        {
+            return typeof(TSection).Name + "_Edit";
+        }
     }
 }

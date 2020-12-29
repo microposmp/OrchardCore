@@ -42,7 +42,7 @@ namespace OrchardCore.Facebook.Drivers
                 return null;
             }
 
-            return Initialize<FacebookSettingsViewModel>("FacebookSettings_Edit", model =>
+            return Initialize<FacebookSettingsViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 var protector = _dataProtectionProvider.CreateProtector(FacebookConstants.Features.Core);
 

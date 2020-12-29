@@ -21,7 +21,7 @@ namespace OrchardCore.Users.TimeZone.Drivers
 
         public override IDisplayResult Edit(UserTimeZone userTimeZone, BuildEditorContext context)
         {
-            return Initialize<UserTimeZoneViewModel>("UserTimeZone_Edit", model =>
+            return Initialize<UserTimeZoneViewModel>(GetSettingsEditorShapeType(), model =>
             {
                 model.TimeZoneId = userTimeZone.TimeZoneId;
             }).Location("Content:2");

@@ -8,15 +8,17 @@ namespace OrchardCore.Taxonomies.Settings
 {
     public class TaxonomyFieldTagsEditorSettingsDriver : ContentPartFieldDefinitionDisplayDriver<TaxonomyField>
     {
+        private const string EditorType = "Tags";
+
         public override IDisplayResult Edit(ContentPartFieldDefinition partFieldDefinition)
         {
-            return Initialize<TaxonomyFieldTagsEditorSettings>("TaxonomyFieldTagsEditorSettings_Edit", model => partFieldDefinition.PopulateSettings(model))
+            return Initialize<TaxonomyFieldTagsEditorSettings>(GetSettingsEditorShapeType(EditorType), model => partFieldDefinition.PopulateSettings(model))
                 .Location("Editor");
         }
 
         public override async Task<IDisplayResult> UpdateAsync(ContentPartFieldDefinition partFieldDefinition, UpdatePartFieldEditorContext context)
         {
-            if (partFieldDefinition.Editor() == "Tags")
+            if (partFieldDefinition.Editor() == EditorType)
             {
                 var model = new TaxonomyFieldTagsEditorSettings();
 

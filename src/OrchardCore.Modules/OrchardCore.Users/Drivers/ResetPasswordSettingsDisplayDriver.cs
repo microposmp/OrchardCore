@@ -34,7 +34,7 @@ namespace OrchardCore.Users.Drivers
                 return null;
             }
 
-            return Initialize<ResetPasswordSettings>("ResetPasswordSettings_Edit", model =>
+            return Initialize<ResetPasswordSettings>(GetSettingsEditorShapeType(), model =>
             {
                 model.AllowResetPassword = settings.AllowResetPassword;
                 model.UseSiteTheme = settings.UseSiteTheme;

@@ -34,7 +34,7 @@ namespace OrchardCore.Layers.Drivers
                 return null;
             }
 
-            return Initialize<LayerSettingsViewModel>("LayerSettings_Edit", model =>
+            return Initialize<LayerSettingsViewModel>(GetSettingsEditorShapeType(), model =>
                 {
                     model.Zones = String.Join(", ", settings.Zones);
                 }).Location("Content:3").OnGroup(GroupId);
