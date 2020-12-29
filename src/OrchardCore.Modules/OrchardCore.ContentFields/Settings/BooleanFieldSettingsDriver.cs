@@ -10,7 +10,7 @@ namespace OrchardCore.ContentFields.Settings
     {
         public override IDisplayResult Edit(ContentPartFieldDefinition partFieldDefinition)
         {
-            return Initialize<BooleanFieldSettings>("BooleanFieldSettings_Edit", model => partFieldDefinition.PopulateSettings(model))
+            return Initialize<BooleanFieldSettings>(GetSettingsEditorShapeType(), model => partFieldDefinition.PopulateSettings(model))
                 .Location("Content");
         }
 

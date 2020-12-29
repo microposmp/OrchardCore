@@ -10,7 +10,7 @@ namespace OrchardCore.ContentFields.Settings
     {
         public override IDisplayResult Edit(ContentPartFieldDefinition partFieldDefinition)
         {
-            return Initialize<TimeFieldSettings>("TimeFieldSettings_Edit", model => partFieldDefinition.PopulateSettings(model))
+            return Initialize<TimeFieldSettings>(GetSettingsEditorShapeType(), model => partFieldDefinition.PopulateSettings(model))
                 .Location("Content");
         }
 

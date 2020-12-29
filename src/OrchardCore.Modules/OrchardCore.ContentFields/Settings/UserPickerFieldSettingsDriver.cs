@@ -20,7 +20,7 @@ namespace OrchardCore.ContentFields.Settings
 
         public override IDisplayResult Edit(ContentPartFieldDefinition partFieldDefinition)
         {
-            return Initialize<UserPickerFieldSettingsViewModel>("UserPickerFieldSettings_Edit", async model =>
+            return Initialize<UserPickerFieldSettingsViewModel>(GetSettingsEditorShapeType(), async model =>
             {
                 var settings = partFieldDefinition.GetSettings<UserPickerFieldSettings>();
                 model.Hint = settings.Hint;

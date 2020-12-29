@@ -10,7 +10,7 @@ namespace OrchardCore.ContentFields.Settings
     {
         public override IDisplayResult Edit(ContentPartFieldDefinition partFieldDefinition)
         {
-            return Initialize<YoutubeFieldSettings>("YoutubeFieldSetting_Edit", model =>
+            return Initialize<YoutubeFieldSettings>(GetSettingsEditorShapeType(), model =>
              {
                  partFieldDefinition.PopulateSettings(model);
                  model.Height = model.Height != default(int) ? model.Height : 315;
