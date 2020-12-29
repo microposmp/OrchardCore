@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
 using OrchardCore.ContentManagement.Metadata.Models;
@@ -23,7 +22,7 @@ namespace OrchardCore.Facebook.Widgets.Settings
 
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!String.Equals(nameof(FacebookPluginPart), contentTypePartDefinition.PartDefinition.Name))
+            if (!CanHandleModel(contentTypePartDefinition))
             {
                 return null;
             }
@@ -37,7 +36,7 @@ namespace OrchardCore.Facebook.Widgets.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!String.Equals(nameof(FacebookPluginPart), contentTypePartDefinition.PartDefinition.Name))
+            if (!CanHandleModel(contentTypePartDefinition))
             {
                 return null;
             }

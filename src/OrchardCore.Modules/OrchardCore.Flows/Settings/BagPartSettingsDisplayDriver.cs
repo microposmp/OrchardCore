@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
@@ -27,7 +26,7 @@ namespace OrchardCore.Flows.Settings
 
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!String.Equals(nameof(BagPart), contentTypePartDefinition.PartDefinition.Name))
+            if (!CanHandleModel(contentTypePartDefinition))
             {
                 return null;
             }
@@ -48,7 +47,7 @@ namespace OrchardCore.Flows.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!String.Equals(nameof(BagPart), contentTypePartDefinition.PartDefinition.Name))
+            if (!CanHandleModel(contentTypePartDefinition))
             {
                 return null;
             }

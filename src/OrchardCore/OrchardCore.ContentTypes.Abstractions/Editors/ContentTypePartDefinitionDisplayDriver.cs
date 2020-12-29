@@ -24,4 +24,21 @@ namespace OrchardCore.ContentTypes.Editors
             return true;
         }
     }
+
+    /// <summary>
+    /// A concrete implementation of <see cref="ContentTypePartDefinitionDisplayDriver&lt;TPart&gt;"/> provides a driver for part definitions
+    /// of the type <c>TPart</c>.
+    /// </summary>
+    public abstract class ContentTypePartDefinitionDisplayDriver<TPart> : ContentTypePartDefinitionDisplayDriver
+    {
+        public override bool CanHandleModel(ContentTypePartDefinition model)
+        {
+            return string.Equals(typeof(TPart).Name, model.PartDefinition.Name);
+        }
+
+        protected string GetSettingsEditorShapeType()
+        {
+            return typeof(TPart).Name + "Settings_Edit";
+        }
+    }
 }

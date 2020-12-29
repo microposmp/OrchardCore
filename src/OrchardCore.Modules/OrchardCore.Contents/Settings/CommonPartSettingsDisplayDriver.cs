@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using OrchardCore.ContentManagement.Metadata.Models;
 using OrchardCore.Contents.Models;
@@ -13,7 +12,7 @@ namespace OrchardCore.Lists.Settings
     {
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!String.Equals(nameof(CommonPart), contentTypePartDefinition.PartDefinition.Name))
+            if (!CanHandleModel(contentTypePartDefinition))
             {
                 return null;
             }
@@ -28,7 +27,7 @@ namespace OrchardCore.Lists.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!String.Equals(nameof(CommonPart), contentTypePartDefinition.PartDefinition.Name))
+            if (!CanHandleModel(contentTypePartDefinition))
             {
                 return null;
             }
