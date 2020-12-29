@@ -11,9 +11,10 @@ using OrchardCore.Mvc.Utilities;
 
 namespace OrchardCore.Html.Settings
 {
-    public class HtmlBodyPartTrumbowygEditorSettingsDriver : ContentTypePartDefinitionDisplayDriver
+    public class HtmlBodyPartTrumbowygEditorSettingsDriver : ContentTypePartDefinitionDisplayDriver<HtmlBodyPart>
     {
         private readonly IStringLocalizer S;
+        private const string EditorType = "Trumbowyg";
 
         public HtmlBodyPartTrumbowygEditorSettingsDriver(IStringLocalizer<HtmlBodyPartTrumbowygEditorSettingsDriver> localizer)
         {
@@ -22,12 +23,7 @@ namespace OrchardCore.Html.Settings
 
         public override IDisplayResult Edit(ContentTypePartDefinition contentTypePartDefinition, IUpdateModel updater)
         {
-            if (!String.Equals(nameof(HtmlBodyPart), contentTypePartDefinition.PartDefinition.Name, StringComparison.Ordinal))
-            {
-                return null;
-            }
-
-            return Initialize<TrumbowygSettingsViewModel>("HtmlBodyPartTrumbowygSettings_Edit", model =>
+            return Initialize<TrumbowygSettingsViewModel>(GetSettingsEditorShapeType(EditorType), model =>
             {
                 var settings = contentTypePartDefinition.GetSettings<HtmlBodyPartTrumbowygEditorSettings>();
 
@@ -39,12 +35,7 @@ namespace OrchardCore.Html.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentTypePartDefinition contentTypePartDefinition, UpdateTypePartEditorContext context)
         {
-            if (!String.Equals(nameof(HtmlBodyPart), contentTypePartDefinition.PartDefinition.Name, StringComparison.Ordinal))
-            {
-                return null;
-            }
-
-            if (contentTypePartDefinition.Editor() == "Trumbowyg")
+            if (contentTypePartDefinition.Editor() == EditorType)
             {
                 var model = new TrumbowygSettingsViewModel();
                 var settings = new HtmlBodyPartTrumbowygEditorSettings();
