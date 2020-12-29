@@ -41,9 +41,16 @@ namespace OrchardCore.ContentTypes.Editors
             return string.Equals(typeof(TField).Name, model.FieldDefinition.Name);
         }
 
-        protected string GetSettingsEditorShapeType()
+        protected string GetSettingsEditorShapeType(string editorType = null)
         {
-            return typeof(TField).Name + "Settings_Edit";
+            var customEditor = "";
+
+            if (!string.IsNullOrEmpty(editorType))
+            {
+                customEditor = editorType + "Editor";
+            }
+
+            return typeof(TField).Name + customEditor + "Settings_Edit";
         }
     }
 }
