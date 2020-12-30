@@ -39,14 +39,11 @@ namespace OrchardCore.ContentTypes.Editors
 
         protected string GetSettingsEditorShapeType(string editorType = null)
         {
-            var customEditor = "";
-
-            if (!string.IsNullOrEmpty(editorType))
+            return string.IsNullOrEmpty(editorType) switch
             {
-                customEditor = editorType + "Editor";
-            }
-
-            return typeof(TPart).Name + customEditor + "Settings_Edit";
+                true => $"{typeof(TPart).Name}Settings_Edit",
+                false => $"{typeof(TPart).Name}{editorType}EditorSettings_Edit"
+            };
         }
     }
 }
