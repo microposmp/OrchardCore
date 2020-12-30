@@ -1,15 +1,16 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
+using OrchardCore.ContentFields.Fields;
 using OrchardCore.ContentManagement.Metadata.Models;
 using OrchardCore.ContentTypes.Editors;
 using OrchardCore.DisplayManagement.Views;
 
 namespace OrchardCore.Lucene.Settings
 {
-    public class ContentPickerFieldLuceneEditorSettingsDriver : ContentPartFieldDefinitionDisplayDriver
+    public class ContentPickerFieldLuceneEditorSettingsDriver : ContentPartFieldDefinitionDisplayDriver<ContentPickerField>
     {
         private readonly LuceneIndexSettingsService _luceneIndexSettingsService;
+        private const string EditorType = "Lucene";
 
         public ContentPickerFieldLuceneEditorSettingsDriver(LuceneIndexSettingsService luceneIndexSettingsService)
         {
@@ -18,7 +19,7 @@ namespace OrchardCore.Lucene.Settings
 
         public override IDisplayResult Edit(ContentPartFieldDefinition partFieldDefinition)
         {
-            return Initialize<ContentPickerFieldLuceneEditorSettings>("ContentPickerFieldLuceneEditorSettings_Edit", async model =>
+            return Initialize<ContentPickerFieldLuceneEditorSettings>(GetSettingsEditorShapeType(EditorType), async model =>
             {
                 partFieldDefinition.PopulateSettings<ContentPickerFieldLuceneEditorSettings>(model);
                 model.Indices = (await _luceneIndexSettingsService.GetSettingsAsync()).Select(x => x.IndexName).ToArray();
@@ -27,7 +28,7 @@ namespace OrchardCore.Lucene.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentPartFieldDefinition partFieldDefinition, UpdatePartFieldEditorContext context)
         {
-            if (partFieldDefinition.Editor() == "Lucene")
+            if (partFieldDefinition.Editor() == EditorType)
             {
                 var model = new ContentPickerFieldLuceneEditorSettings();
 
@@ -37,11 +38,6 @@ namespace OrchardCore.Lucene.Settings
             }
 
             return Edit(partFieldDefinition);
-        }
-
-        public override bool CanHandleModel(ContentPartFieldDefinition model)
-        {
-            return String.Equals("ContentPickerField", model.FieldDefinition.Name);
         }
     }
 }

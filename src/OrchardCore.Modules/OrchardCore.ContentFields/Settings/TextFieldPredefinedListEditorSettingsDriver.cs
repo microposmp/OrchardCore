@@ -12,6 +12,7 @@ namespace OrchardCore.ContentFields.Settings
     public class TextFieldPredefinedListEditorSettingsDriver : ContentPartFieldDefinitionDisplayDriver<TextField>
     {
         private readonly IStringLocalizer S;
+        private const string EditorType = "PredefinedList";
 
         public TextFieldPredefinedListEditorSettingsDriver(IStringLocalizer<TextFieldPredefinedListEditorSettingsDriver> localizer)
         {
@@ -20,7 +21,7 @@ namespace OrchardCore.ContentFields.Settings
 
         public override IDisplayResult Edit(ContentPartFieldDefinition partFieldDefinition)
         {
-            return Initialize<PredefinedListSettingsViewModel>("TextFieldPredefinedListEditorSettings_Edit", model =>
+            return Initialize<PredefinedListSettingsViewModel>(GetSettingsEditorShapeType(EditorType), model =>
             {
                 var settings = partFieldDefinition.GetSettings<TextFieldPredefinedListEditorSettings>();
 
@@ -33,7 +34,7 @@ namespace OrchardCore.ContentFields.Settings
 
         public override async Task<IDisplayResult> UpdateAsync(ContentPartFieldDefinition partFieldDefinition, UpdatePartFieldEditorContext context)
         {
-            if (partFieldDefinition.Editor() == "PredefinedList")
+            if (partFieldDefinition.Editor() == EditorType)
             {
                 var model = new PredefinedListSettingsViewModel();
                 var settings = new TextFieldPredefinedListEditorSettings();
