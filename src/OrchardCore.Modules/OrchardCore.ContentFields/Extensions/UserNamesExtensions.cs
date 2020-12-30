@@ -1,7 +1,8 @@
 using System;
 using Newtonsoft.Json.Linq;
+using OrchardCore.ContentFields.Fields;
 
-namespace OrchardCore.ContentFields.Fields
+namespace OrchardCore.ContentFields.Extensions
 {
     public static class UserNamesExtensions
     {

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using OrchardCore.ContentFields.Extensions;
 using OrchardCore.ContentFields.Fields;
 using OrchardCore.Indexing;
 
