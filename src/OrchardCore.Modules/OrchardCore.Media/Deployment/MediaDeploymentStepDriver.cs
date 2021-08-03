@@ -6,7 +6,6 @@ using OrchardCore.Deployment;
 using OrchardCore.DisplayManagement.Handlers;
 using OrchardCore.DisplayManagement.ModelBinding;
 using OrchardCore.DisplayManagement.Views;
-using OrchardCore.FileStorage;
 using OrchardCore.Media.ViewModels;
 
 namespace OrchardCore.Media.Deployment

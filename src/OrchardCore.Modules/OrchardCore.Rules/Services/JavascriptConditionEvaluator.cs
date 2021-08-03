@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using OrchardCore.Environment.Shell.Scope;
 using OrchardCore.Rules.Models;
 using OrchardCore.Scripting;
 

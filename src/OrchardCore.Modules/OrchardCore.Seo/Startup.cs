@@ -1,9 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.Data.Migration;
-using OrchardCore.DisplayManagement.Title;
 using OrchardCore.Modules;
 using OrchardCore.Seo.Drivers;
 using OrchardCore.Seo.Models;

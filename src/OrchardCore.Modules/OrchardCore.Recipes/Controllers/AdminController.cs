@@ -15,7 +15,6 @@ using OrchardCore.Modules;
 using OrchardCore.Recipes.Services;
 using OrchardCore.Recipes.ViewModels;
 using OrchardCore.Security;
-using OrchardCore.Settings;
 
 namespace OrchardCore.Recipes.Controllers
 {

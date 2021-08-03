@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using OrchardCore.Environment.Shell.Builders;
 using OrchardCore.Environment.Shell.Descriptor;
-using OrchardCore.Environment.Shell.Descriptor.Models;
 using OrchardCore.Environment.Shell.Descriptor.Settings;
 using OrchardCore.Environment.Shell.Distributed;
 

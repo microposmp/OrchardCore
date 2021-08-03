@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Html;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OrchardCore.DisplayManagement.Implementation;
-using OrchardCore.Environment.Cache;
 
 namespace OrchardCore.DisplayManagement.Shapes
 {

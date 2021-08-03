@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using OrchardCore.Admin;
 using OrchardCore.Contents;
 using OrchardCore.ContentFields.Settings;
-using OrchardCore.ContentFields.Services;
 using OrchardCore.ContentFields.ViewModels;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Metadata;

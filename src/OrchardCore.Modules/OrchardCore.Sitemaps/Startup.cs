@@ -10,7 +10,6 @@ using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.Data.Migration;
 using OrchardCore.DisplayManagement;
 using OrchardCore.DisplayManagement.Handlers;
-using OrchardCore.Entities;
 using OrchardCore.Modules;
 using OrchardCore.Mvc.Core.Utilities;
 using OrchardCore.Navigation;

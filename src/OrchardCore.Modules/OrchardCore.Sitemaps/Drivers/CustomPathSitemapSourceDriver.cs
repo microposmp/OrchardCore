@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
@@ -9,7 +7,6 @@ using OrchardCore.DisplayManagement.ModelBinding;
 using OrchardCore.DisplayManagement.Views;
 using OrchardCore.Mvc.ModelBinding;
 using OrchardCore.Sitemaps.Models;
-using OrchardCore.Sitemaps.Services;
 using OrchardCore.Sitemaps.ViewModels;
 
 namespace OrchardCore.Sitemaps.Drivers

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Fluid;
 using Fluid.Values;
@@ -42,7 +40,6 @@ using OrchardCore.DisplayManagement.Handlers;
 using OrchardCore.DisplayManagement.Liquid;
 using OrchardCore.DisplayManagement.Liquid.Tags;
 using OrchardCore.DisplayManagement.Views;
-using OrchardCore.Entities;
 using OrchardCore.Feeds;
 using YesSql.Filters.Query;
 using OrchardCore.Indexing;

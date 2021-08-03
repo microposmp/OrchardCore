@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,11 +10,8 @@ using OrchardCore.ContentManagement.Display;
 using OrchardCore.Data.Documents;
 using OrchardCore.DisplayManagement.Layout;
 using OrchardCore.DisplayManagement.ModelBinding;
-using OrchardCore.DisplayManagement.Shapes;
 using OrchardCore.DisplayManagement.Theming;
-using OrchardCore.DisplayManagement.Zones;
 using OrchardCore.Documents;
-using OrchardCore.Environment.Shell.Scope;
 using OrchardCore.Layers.Handlers;
 using OrchardCore.Layers.Models;
 using OrchardCore.Layers.ViewModels;

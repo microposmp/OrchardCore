@@ -8,7 +8,6 @@ using Fluid;
 using Fluid.Ast;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
-using OrchardCore.DisplayManagement;
 using OrchardCore.Liquid;
 using OrchardCore.ResourceManagement;
 
