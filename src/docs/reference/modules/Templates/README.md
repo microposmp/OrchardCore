@@ -39,6 +39,16 @@ This template is called when displaying a content item with the `Detail` display
 | `Model.ContentItem` | Represents the current content item being rendered by the template. |
 | `Model.ContentItem.Content` | A JSON object containing all the data of the content item. |
 
+### `Content__[ContentItemId]`
+
+This template is called when displaying a content item with the `Detail` display type, for instance when accessed from its own URL.
+
+#### Content with ContentItemId Examples
+
+| Template | Filename|
+| --------- | ------------ |
+| `Content__4zg0s1e0svjdh5rz2vghyjr6nk` | `Content-4zg0s1e0svjdh5rz2vghyjr6nk.cshtml` |
+
 ### `Content_[DisplayType]__[ContentType]`
 
 This template is called when displaying a content item with a specific display type.
@@ -50,6 +60,17 @@ For instance, when a content item is displayed in a list, the `Summary` display 
 | --------- | ------------ |
 | `Content_Summary__BlogPost` | `Content-BlogPost.Summary.cshtml` |
 | `Content_Summary__Article` | `Content-Article.Summary.cshtml` |
+
+### `Content_[DisplayType]__[ContentItemId]`
+
+This template is called when displaying a content item with a specific display type and content item id.
+For instance, when a content item is displayed in a list, the `Summary` display type is commonly used.
+
+#### `Content with Display Type and ContentItemId Examples`
+
+| Template | Filename|
+| --------- | ------------ |
+| `Content_Summary__4zg0s1e0svjdh5rz2vghyjr6nk` | `Content-4zg0s1e0svjdh5rz2vghyjr6nk.Summary.cshtml` |
 
 ## Widget templates
 

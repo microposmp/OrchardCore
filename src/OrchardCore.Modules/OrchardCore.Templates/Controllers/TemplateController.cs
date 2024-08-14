@@ -242,7 +242,8 @@ namespace OrchardCore.Templates.Controllers
                 AdminTemplates = adminTemplates,
                 Name = name,
                 Content = template.Content,
-                Description = template.Description
+                Description = template.Description,
+                PreviewContentItemId = template.PreviewContentItemId
             };
 
             ViewData["ReturnUrl"] = returnUrl;
@@ -290,7 +291,7 @@ namespace OrchardCore.Templates.Controllers
 
             if (ModelState.IsValid)
             {
-                var template = new Template { Content = model.Content, Description = model.Description };
+                var template = new Template { Content = model.Content, Description = model.Description, PreviewContentItemId = model.PreviewContentItemId };
 
                 await (model.AdminTemplates
                     ? _adminTemplatesManager.RemoveTemplateAsync(sourceName)

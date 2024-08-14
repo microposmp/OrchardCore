@@ -57,6 +57,12 @@ else
         <span class="hint">@T["The description of the template."]</span>
     </div>
 
+    <div class="mb-3" asp-validation-class-for="PreviewContentItemId">
+        <label asp-for="PreviewContentItemId" class="form-label">@T["PreviewContentItemId"]</label>
+        <input asp-for="PreviewContentItemId" class="form-control" autofocus />
+        <span class="hint">@T["The ContentItemId used for previewing this template."]</span>
+    </div>
+
     <div class="mb-3" asp-validation-class-for="Content">
         <label asp-for="Content" class="form-label">@T["Content"]</label>
         <div id="@Html.IdFor(x => x.Content)_editor" asp-for="Text" style="min-height: 600px;" class="form-control" dir="@culture.GetLanguageDirection()"></div>
@@ -95,6 +101,7 @@ else
             var editor = monaco.editor.create(document.getElementById('@Html.IdFor(x => x.Content)_editor'), settings);
             var textArea = document.getElementById('@Html.IdFor(x => x.Content)');
             var nameInput = document.getElementById('@Html.IdFor(x => x.Name)');
+            var previewContentItemId = document.getElementById('@Html.IdFor(x => x.PreviewContentItemId)');
             var antiforgerytoken = $("[name='__RequestVerificationToken']").val();
 
             var triggerPreview = null;
@@ -103,6 +110,7 @@ else
                 var formData = {
                     'Name': nameInput.value,
                     'Content': editor.getValue(),
+                    'PreviewContentItemId': previewContentItemId.value,
                     '__RequestVerificationToken': antiforgerytoken
                 };
                 // store the form data to pass it in the event handler

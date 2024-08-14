@@ -29,7 +29,7 @@ namespace OrchardCore.Templates.Services
                         return templatesDocument;
                     }
 
-                    var template = new Template { Content = viewModel.Content };
+                    var template = new Template { Content = viewModel.Content, PreviewContentItemId = viewModel.PreviewContentItemId };
                     templatesDocument.Templates.Add(viewModel.Name, template);
                 }
 

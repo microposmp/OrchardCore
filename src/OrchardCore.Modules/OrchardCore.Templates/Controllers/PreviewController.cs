@@ -59,29 +59,34 @@ namespace OrchardCore.Templates.Controllers
 
             var name = Request.Form["Name"];
             var content = Request.Form["Content"];
+            var previewContentItemId = Request.Form["PreviewContentItemId"].ToString();
 
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(content))
             {
-                HttpContext.Items["OrchardCore.PreviewTemplate"] = new TemplateViewModel { Name = name, Content = content };
+                HttpContext.Items["OrchardCore.PreviewTemplate"] = new TemplateViewModel { Name = name, Content = content, PreviewContentItemId = previewContentItemId };
             }
 
             var handle = Request.Form["Handle"].ToString();
 
-            string contentItemId;
+            string contentItemId = previewContentItemId;
 
-            if (string.IsNullOrEmpty(handle) || handle == _homeUrl)
+            if (string.IsNullOrEmpty(contentItemId))
             {
-                var homeRoute = (await _siteService.GetSiteSettingsAsync()).HomeRoute;
-                contentItemId = homeRoute["contentItemId"]?.ToString();
-            }
-            else
-            {
-                var index = handle.IndexOf(_homeUrl, StringComparison.Ordinal);
 
-                handle = (index < 0 ? handle : handle[_homeUrl.Length..])
-                    .ToUriComponents(UriFormat.SafeUnescaped);
+                if (string.IsNullOrEmpty(handle) || handle == _homeUrl)
+                {
+                    var homeRoute = (await _siteService.GetSiteSettingsAsync()).HomeRoute;
+                    contentItemId = homeRoute["contentItemId"]?.ToString();
+                }
+                else
+                {
+                    var index = handle.IndexOf(_homeUrl, StringComparison.Ordinal);
 
-                contentItemId = await _contentHandleManager.GetContentItemIdAsync(AutorouteConstants.SlugPrefix + handle);
+                    handle = (index < 0 ? handle : handle[_homeUrl.Length..])
+                        .ToUriComponents(UriFormat.SafeUnescaped);
+
+                    contentItemId = await _contentHandleManager.GetContentItemIdAsync(AutorouteConstants.SlugPrefix + handle);
+                }
             }
 
             if (string.IsNullOrEmpty(contentItemId))
