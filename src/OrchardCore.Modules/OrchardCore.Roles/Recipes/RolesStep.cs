@@ -1,83 +1,86 @@
-using System;
-using System.Linq;
 using System.Text.Json.Nodes;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using OrchardCore.Recipes.Models;
 using OrchardCore.Recipes.Services;
 using OrchardCore.Security;
 using OrchardCore.Security.Permissions;
 
-namespace OrchardCore.Roles.Recipes
+namespace OrchardCore.Roles.Recipes;
+
+/// <summary>
+/// This recipe step creates a set of roles.
+/// </summary>
+public sealed class RolesStep : NamedRecipeStepHandler
 {
-    /// <summary>
-    /// This recipe step creates a set of roles.
-    /// </summary>
-    public sealed class RolesStep : IRecipeStepHandler
+    private readonly RoleManager<IRole> _roleManager;
+    private readonly ISystemRoleNameProvider _systemRoleNameProvider;
+
+    public RolesStep(
+        RoleManager<IRole> roleManager,
+        ISystemRoleNameProvider systemRoleNameProvider)
+        : base("Roles")
     {
-        private readonly RoleManager<IRole> _roleManager;
+        _roleManager = roleManager;
+        _systemRoleNameProvider = systemRoleNameProvider;
+    }
 
-        public RolesStep(RoleManager<IRole> roleManager)
-        {
-            _roleManager = roleManager;
-        }
+    protected override async Task HandleAsync(RecipeExecutionContext context)
+    {
+        var model = context.Step.ToObject<RolesStepModel>();
 
-        public async Task ExecuteAsync(RecipeExecutionContext context)
+        foreach (var roleEntry in model.Roles)
         {
-            if (!string.Equals(context.Name, "Roles", StringComparison.OrdinalIgnoreCase))
+            var roleName = roleEntry.Name?.Trim();
+
+            if (string.IsNullOrWhiteSpace(roleName))
             {
-                return;
+                continue;
             }
 
-            var model = context.Step.ToObject<RolesStepModel>();
+            var role = await _roleManager.FindByNameAsync(roleName);
+            var isNewRole = role == null;
 
-            foreach (var importedRole in model.Roles)
+            if (isNewRole)
             {
-                if (string.IsNullOrWhiteSpace(importedRole.Name))
+                role = new Role
                 {
-                    continue;
-                }
+                    RoleName = roleName,
+                };
+            }
 
-                var role = (Role)await _roleManager.FindByNameAsync(importedRole.Name);
-                var isNewRole = role == null;
+            if (role is Role r)
+            {
+                r.RoleDescription = roleEntry.Description;
+                r.RoleClaims.RemoveAll(c => c.ClaimType == Permission.ClaimType);
 
-                if (isNewRole)
+                if (!await _systemRoleNameProvider.IsAdminRoleAsync(roleName))
                 {
-                    role = new Role
-                    {
-                        RoleName = importedRole.Name
-                    };
+                    r.RoleClaims.AddRange(roleEntry.Permissions.Select(RoleClaim.Create));
                 }
+            }
 
-                role.RoleDescription = importedRole.Description;
-                role.RoleClaims.RemoveAll(c => c.ClaimType == Permission.ClaimType);
-                role.RoleClaims.AddRange(importedRole.Permissions.Select(p => new RoleClaim
-                {
-                    ClaimType = Permission.ClaimType,
-                    ClaimValue = p,
-                }));
-
-                if (isNewRole)
-                {
-                    await _roleManager.CreateAsync(role);
-                }
-                else
-                {
-                    await _roleManager.UpdateAsync(role);
-                }
+            if (isNewRole)
+            {
+                await _roleManager.CreateAsync(role);
+            }
+            else
+            {
+                await _roleManager.UpdateAsync(role);
             }
         }
     }
+}
 
-    public sealed class RolesStepModel
-    {
-        public RolesStepRoleModel[] Roles { get; set; }
-    }
+public sealed class RolesStepModel
+{
+    public RolesStepRoleModel[] Roles { get; set; }
+}
 
-    public sealed class RolesStepRoleModel
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string[] Permissions { get; set; }
-    }
+public sealed class RolesStepRoleModel
+{
+    public string Name { get; set; }
+
+    public string Description { get; set; }
+
+    public string[] Permissions { get; set; }
 }

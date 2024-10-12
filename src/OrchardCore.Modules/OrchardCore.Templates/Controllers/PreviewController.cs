@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,51 +9,51 @@ using OrchardCore.DisplayManagement.ModelBinding;
 using OrchardCore.Settings;
 using OrchardCore.Templates.ViewModels;
 
-namespace OrchardCore.Templates.Controllers
+namespace OrchardCore.Templates.Controllers;
+
+public sealed class PreviewController : Controller
 {
-    public class PreviewController : Controller
+    private readonly IContentManager _contentManager;
+    private readonly IContentHandleManager _contentHandleManager;
+    private readonly IContentItemDisplayManager _contentItemDisplayManager;
+    private readonly IAuthorizationService _authorizationService;
+    private readonly ISiteService _siteService;
+    private readonly IUpdateModelAccessor _updateModelAccessor;
+    private readonly string _homeUrl;
+
+    public PreviewController(
+        IContentManager contentManager,
+        IContentHandleManager contentHandleManager,
+        IContentItemDisplayManager contentItemDisplayManager,
+        IAuthorizationService authorizationService,
+        ISiteService siteService,
+        IUpdateModelAccessor updateModelAccessor,
+        IHttpContextAccessor httpContextAccessor)
     {
-        private readonly IContentManager _contentManager;
-        private readonly IContentHandleManager _contentHandleManager;
-        private readonly IContentItemDisplayManager _contentItemDisplayManager;
-        private readonly IAuthorizationService _authorizationService;
-        private readonly ISiteService _siteService;
-        private readonly IUpdateModelAccessor _updateModelAccessor;
-        private readonly string _homeUrl;
+        _contentManager = contentManager;
+        _contentHandleManager = contentHandleManager;
+        _contentItemDisplayManager = contentItemDisplayManager;
+        _authorizationService = authorizationService;
+        _siteService = siteService;
+        _updateModelAccessor = updateModelAccessor;
+        _homeUrl = httpContextAccessor.HttpContext.Request.PathBase.Add("/");
+    }
 
-        public PreviewController(
-            IContentManager contentManager,
-            IContentHandleManager contentHandleManager,
-            IContentItemDisplayManager contentItemDisplayManager,
-            IAuthorizationService authorizationService,
-            ISiteService siteService,
-            IUpdateModelAccessor updateModelAccessor,
-            IHttpContextAccessor httpContextAccessor)
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Render()
+    {
+        if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageTemplates))
         {
-            _contentManager = contentManager;
-            _contentHandleManager = contentHandleManager;
-            _contentItemDisplayManager = contentItemDisplayManager;
-            _authorizationService = authorizationService;
-            _siteService = siteService;
-            _updateModelAccessor = updateModelAccessor;
-            _homeUrl = httpContextAccessor.HttpContext.Request.PathBase.Add("/");
+            return this.ChallengeOrForbid();
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Render()
-        {
-            if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageTemplates))
-            {
-                return this.ChallengeOrForbid();
-            }
-
-            // Mark request as a `Preview` request so that drivers / handlers or underlying services can be aware of an active preview mode.
-            HttpContext.Features.Set(new ContentPreviewFeature());
+        // Mark request as a `Preview` request so that drivers / handlers or underlying services can be aware of an active preview mode.
+        HttpContext.Features.Set(new ContentPreviewFeature());
 
             var name = Request.Form["Name"];
             var content = Request.Form["Content"];
@@ -66,7 +64,7 @@ namespace OrchardCore.Templates.Controllers
                 HttpContext.Items["OrchardCore.PreviewTemplate"] = new TemplateViewModel { Name = name, Content = content, PreviewContentItemId = previewContentItemId };
             }
 
-            var handle = Request.Form["Handle"].ToString();
+        var handle = Request.Form["Handle"].ToString();
 
             string contentItemId = previewContentItemId;
 
@@ -89,20 +87,19 @@ namespace OrchardCore.Templates.Controllers
                 }
             }
 
-            if (string.IsNullOrEmpty(contentItemId))
-            {
-                return NotFound();
-            }
-
-            var contentItem = await _contentManager.GetAsync(contentItemId, VersionOptions.Published);
-            if (contentItem is null)
-            {
-                return NotFound();
-            }
-
-            var model = await _contentItemDisplayManager.BuildDisplayAsync(contentItem, _updateModelAccessor.ModelUpdater, "Detail");
-
-            return View(model);
+        if (string.IsNullOrEmpty(contentItemId))
+        {
+            return NotFound();
         }
+
+        var contentItem = await _contentManager.GetAsync(contentItemId, VersionOptions.Published);
+        if (contentItem is null)
+        {
+            return NotFound();
+        }
+
+        var model = await _contentItemDisplayManager.BuildDisplayAsync(contentItem, _updateModelAccessor.ModelUpdater, "Detail");
+
+        return View(model);
     }
 }
