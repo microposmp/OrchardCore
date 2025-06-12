@@ -41,7 +41,7 @@ services.AddAzureAISearchIndexingSource("CustomSource", o =>
 });
 ```
 
-Next, you need to implement the `IIndexEntityHandler` interface. In the `CreatingAsync` and `UpdatingAsync` methods, populate or update the `context.Model.Put(new AzureAISearchIndexMetadata() { IndexMappings = new ElasticsearchIndexMap() })` to define the index fields and their types. You may use `IndexEntityHandlerBase` to simplify your implementation. 
+Next, you need to implement the `IIndexProfileHandler` interface. In the `CreatingAsync` and `UpdatingAsync` methods, populate or update the `context.Model.Put(new AzureAISearchIndexMetadata() { IndexMappings = new ElasticsearchIndexMap() })` to define the index fields and their types. You may use `IndexProfileHandlerBase` to simplify your implementation. 
 
 If you want the UI to capture custom data related to your source, implement `DisplayDriver<IndexEntity>`.  
 
@@ -83,9 +83,44 @@ The `Create Index Step` create an Azure AI Search index if one does not already 
 }
 ```
 
-note !!!
-     It's recommended to use the `Indexing` recipe step instead as the `azureai-index-create` step is obsolete. 
+!!! note
+    It's recommended to use the `CreateOrUpdateIndexProfile` recipe step instead as the `azureai-index-create` step is obsolete. 
 
+Here is an example of how to create `AzureAISearch` index profile using the `IndexProfile` for Content items.
+
+```json
+{
+  "steps":[
+    {
+      "name":"CreateOrUpdateIndexProfile",
+      "indexes": [
+	    {
+		    "Name": "BlogPostsAI",
+            "IndexName": "blogposts",
+		    "ProviderName": "AzureAISearch",
+		    "Type": "Content",
+		    "Properties": {
+			    "ContentIndexMetadata": {
+				    "IndexLatest": false,
+				    "IndexedContentTypes": ["BlogPosts"],
+				    "Culture": "any"
+			    },
+                "AzureAISearchIndexMetadata": {
+                    "AnalyzerName": "standard"
+                },
+                "AzureAISearchDefaultQueryMetadata": {
+                    "QueryAnalyzerName": "standard.lucene",
+                    "DefaultSearchFields": [
+                        "Content__ContentItem__FullText"
+                    ]
+                }
+		    }
+	    }
+      ]
+    }
+  ]
+}
+```
 
 ### Reset Azure AI Search Index Step
 
@@ -118,8 +153,8 @@ To reset all indices:
 }
 ```
 
-note !!!
-     It's recommended to use the `ResetIndexing` recipe step instead as the `azureai-index-reset` step is obsolete. 
+!!! note
+    It's recommended to use the `ResetIndexProfile` recipe step instead as the `azureai-index-reset` step is obsolete. 
 
 ### Rebuild Azure AI Search Index Step
 
@@ -152,8 +187,8 @@ To rebuild all indices:
 }
 ```
 
-note !!!
-     It's recommended to use the `RebuildIndexing` recipe step instead as the `azureai-index-rebuild` step is obsolete. 
+!!! note
+    It's recommended to use the `RebuildIndexProfile` recipe step instead as the `azureai-index-rebuild` step is obsolete. 
 
 ## Search Module (`OrchardCore.Search`)
 
