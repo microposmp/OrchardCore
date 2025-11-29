@@ -66,11 +66,10 @@ public sealed class PreviewController : Controller
 
         var handle = Request.Form["Handle"].ToString();
 
-        string contentItemId = previewContentItemId;
+        string contentItemId;
 
-        if (string.IsNullOrEmpty(contentItemId))
+        if (string.IsNullOrEmpty(previewContentItemId))
         {
-
             if (string.IsNullOrEmpty(handle) || handle == _homeUrl)
             {
                 var homeRoute = (await _siteService.GetSiteSettingsAsync()).HomeRoute;
@@ -85,6 +84,10 @@ public sealed class PreviewController : Controller
 
                 contentItemId = await _contentHandleManager.GetContentItemIdAsync(AutorouteConstants.SlugPrefix + handle);
             }
+        }
+        else
+        {
+            contentItemId = previewContentItemId;
         }
 
         if (string.IsNullOrEmpty(contentItemId))
