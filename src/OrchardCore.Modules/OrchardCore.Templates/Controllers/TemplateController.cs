@@ -220,7 +220,7 @@ public sealed class TemplateController : Controller
                 Name = name,
                 Content = template.Content,
                 Description = template.Description,
-                PreviewContentItemId = template.PreviewContentItemId
+                PreviewContentItemId = template.PreviewContentItemId,
             };
 
         ViewData["ReturnUrl"] = returnUrl;

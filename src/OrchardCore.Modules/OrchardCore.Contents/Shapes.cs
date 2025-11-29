@@ -29,19 +29,19 @@ public class Shapes : ShapeTableProvider
 
                     var encodedContentType = contentItem.ContentType.EncodeAlternateElement();
 
-                        // Content__[ContentType] e.g. Content-BlogPost
-                        displaying.Shape.Metadata.Alternates.Add("Content__" + encodedContentType);
+                    // Content__[ContentType] e.g. Content-BlogPost,
+                    displaying.Shape.Metadata.Alternates.Add("Content__" + encodedContentType);
 
-                        // Content__[Id] e.g. Content-42
-                        displaying.Shape.Metadata.Alternates.Add("Content__" + contentItem.Id);
+                    // Content__[Id] e.g. Content-42,
+                    displaying.Shape.Metadata.Alternates.Add("Content__" + contentItem.Id);
 
-                        // Content_[DisplayType]__[ContentType] e.g. Content-BlogPost.Summary
-                        displaying.Shape.Metadata.Alternates.Add("Content_" + displaying.Shape.Metadata.DisplayType + "__" + encodedContentType);
+                    // Content_[DisplayType]__[ContentType] e.g. Content-BlogPost.Summary
+                    displaying.Shape.Metadata.Alternates.Add("Content_" + displaying.Shape.Metadata.DisplayType + "__" + encodedContentType);
 
-                        // Content_[DisplayType]__[Id] e.g. Content-42.Summary
-                        displaying.Shape.Metadata.Alternates.Add("Content_" + displaying.Shape.Metadata.DisplayType + "__" + contentItem.Id);
-                    }
-                });
+                    // Content_[DisplayType]__[Id] e.g. Content-42.Summary
+                    displaying.Shape.Metadata.Alternates.Add("Content_" + displaying.Shape.Metadata.DisplayType + "__" + contentItem.Id);
+                }
+            });
 
         // This shapes provides a way to lazily load a content item render it in any display type.
         builder.Describe("ContentItem")
