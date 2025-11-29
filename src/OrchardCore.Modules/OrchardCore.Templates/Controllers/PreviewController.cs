@@ -55,37 +55,37 @@ public sealed class PreviewController : Controller
         // Mark request as a `Preview` request so that drivers / handlers or underlying services can be aware of an active preview mode.
         HttpContext.Features.Set(new ContentPreviewFeature());
 
-            var name = Request.Form["Name"];
-            var content = Request.Form["Content"];
-            var previewContentItemId = Request.Form["PreviewContentItemId"].ToString();
+        var name = Request.Form["Name"];
+        var content = Request.Form["Content"];
+        var previewContentItemId = Request.Form["PreviewContentItemId"].ToString();
 
-            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(content))
-            {
-                HttpContext.Items["OrchardCore.PreviewTemplate"] = new TemplateViewModel { Name = name, Content = content, PreviewContentItemId = previewContentItemId };
-            }
+        if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(content))
+        {
+            HttpContext.Items["OrchardCore.PreviewTemplate"] = new TemplateViewModel { Name = name, Content = content, PreviewContentItemId = previewContentItemId };
+        }
 
         var handle = Request.Form["Handle"].ToString();
 
-            string contentItemId = previewContentItemId;
+        string contentItemId = previewContentItemId;
 
-            if (string.IsNullOrEmpty(contentItemId))
+        if (string.IsNullOrEmpty(contentItemId))
+        {
+
+            if (string.IsNullOrEmpty(handle) || handle == _homeUrl)
             {
-
-                if (string.IsNullOrEmpty(handle) || handle == _homeUrl)
-                {
-                    var homeRoute = (await _siteService.GetSiteSettingsAsync()).HomeRoute;
-                    contentItemId = homeRoute["contentItemId"]?.ToString();
-                }
-                else
-                {
-                    var index = handle.IndexOf(_homeUrl, StringComparison.Ordinal);
-
-                    handle = (index < 0 ? handle : handle[_homeUrl.Length..])
-                        .ToUriComponents(UriFormat.SafeUnescaped);
-
-                    contentItemId = await _contentHandleManager.GetContentItemIdAsync(AutorouteConstants.SlugPrefix + handle);
-                }
+                var homeRoute = (await _siteService.GetSiteSettingsAsync()).HomeRoute;
+                contentItemId = homeRoute["contentItemId"]?.ToString();
             }
+            else
+            {
+                var index = handle.IndexOf(_homeUrl, StringComparison.Ordinal);
+
+                handle = (index < 0 ? handle : handle[_homeUrl.Length..])
+                    .ToUriComponents(UriFormat.SafeUnescaped);
+
+                contentItemId = await _contentHandleManager.GetContentItemIdAsync(AutorouteConstants.SlugPrefix + handle);
+            }
+        }
 
         if (string.IsNullOrEmpty(contentItemId))
         {

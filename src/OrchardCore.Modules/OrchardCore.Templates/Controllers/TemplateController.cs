@@ -214,14 +214,14 @@ public sealed class TemplateController : Controller
             return RedirectToAction(nameof(Create), new { name, returnUrl });
         }
 
-            var model = new TemplateViewModel
-            {
-                AdminTemplates = adminTemplates,
-                Name = name,
-                Content = template.Content,
-                Description = template.Description,
-                PreviewContentItemId = template.PreviewContentItemId,
-            };
+        var model = new TemplateViewModel
+        {
+            AdminTemplates = adminTemplates,
+            Name = name,
+            Content = template.Content,
+            Description = template.Description,
+            PreviewContentItemId = template.PreviewContentItemId,
+        };
 
         ViewData["ReturnUrl"] = returnUrl;
         return View(model);
@@ -255,9 +255,9 @@ public sealed class TemplateController : Controller
             return NotFound();
         }
 
-            if (ModelState.IsValid)
-            {
-                var template = new Template { Content = model.Content, Description = model.Description, PreviewContentItemId = model.PreviewContentItemId };
+        if (ModelState.IsValid)
+        {
+            var template = new Template { Content = model.Content, Description = model.Description, PreviewContentItemId = model.PreviewContentItemId };
 
             await (model.AdminTemplates
                 ? _adminTemplatesManager.RemoveTemplateAsync(sourceName)
