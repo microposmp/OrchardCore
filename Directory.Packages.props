@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="AngleSharp" Version="1.4.0" />
-    <PackageVersion Include="AWSSDK.S3" Version="4.0.14.3" />
+    <PackageVersion Include="AWSSDK.S3" Version="4.0.15.2" />
     <PackageVersion Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.3.17" />
     <PackageVersion Include="Azure.Communication.Email" Version="1.1.0" />
     <PackageVersion Include="Azure.Communication.Sms" Version="1.0.2" />
@@ -19,15 +19,15 @@
     <PackageVersion Include="DocumentFormat.OpenXml" Version="3.3.0" />
     <PackageVersion Include="Elastic.Clients.Elasticsearch" Version="8.19.13" />
     <PackageVersion Include="Fluid.Core" Version="2.31.0" />
-    <PackageVersion Include="GraphQL" Version="8.8.0" />
-    <PackageVersion Include="GraphQL.DataLoader" Version="8.8.0" />
-    <PackageVersion Include="GraphQL.MicrosoftDI" Version="8.8.0" />
-    <PackageVersion Include="GraphQL.SystemTextJson" Version="8.8.0" />
+    <PackageVersion Include="GraphQL" Version="8.8.2" />
+    <PackageVersion Include="GraphQL.DataLoader" Version="8.8.2" />
+    <PackageVersion Include="GraphQL.MicrosoftDI" Version="8.8.2" />
+    <PackageVersion Include="GraphQL.SystemTextJson" Version="8.8.2" />
     <PackageVersion Include="Jint" Version="4.4.2" />
-    <PackageVersion Include="JsonPath.Net" Version="2.1.1" />
+    <PackageVersion Include="JsonPath.Net" Version="2.2.0" />
     <PackageVersion Include="HtmlSanitizer" Version="9.1.878-beta" />
     <PackageVersion Include="Parlot" Version="1.5.6" />
-    <PackageVersion Include="libphonenumber-csharp" Version="9.0.20" />
+    <PackageVersion Include="libphonenumber-csharp" Version="9.0.21" />
     <PackageVersion Include="Lorem.Universal.NET" Version="5.0.0" />
     <PackageVersion Include="Lucene.Net" Version="4.8.0-beta00017" />
     <PackageVersion Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00017" />
@@ -36,7 +36,7 @@
     <PackageVersion Include="MailKit" Version="4.14.1" />
     <PackageVersion Include="Markdig" Version="0.44.0" />
     <PackageVersion Include="Microsoft.Extensions.Azure" Version="1.13.1" />
-    <PackageVersion Include="Microsoft.Identity.Web" Version="4.1.1" />
+    <PackageVersion Include="Microsoft.Identity.Web" Version="4.2.0" />
     <PackageVersion Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.15.0" />
     <PackageVersion Include="Microsoft.IO.RecyclableMemoryStream" Version="3.0.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
@@ -99,7 +99,7 @@
     <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="10.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.1" />
     <!-- dotnet/extensions repository -->
-    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.1.0" />
     <!-- Serilog.AspNetCore -->
     <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageVersion Include="System.IO.Hashing" Version="10.0.1" />
