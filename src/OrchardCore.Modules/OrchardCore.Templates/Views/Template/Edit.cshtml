@@ -59,6 +59,14 @@ else
         </div>
     </div>
 
+    <div class="ocat-wrapper" asp-validation-class-for="PreviewContentItemId">
+        <label asp-for="PreviewContentItemId" class="ocat-label">@T["PreviewContentItemId"]</label>
+        <div class="ocat-end">
+        <input asp-for="PreviewContentItemId" class="form-control" autofocus />
+        <span class="hint">@T["The ContentItemId used for previewing this template."]</span>
+        </div>
+    </div>
+
     <div class="ocat-wrapper" asp-validation-class-for="Content">
         <label asp-for="Content" class="ocat-label">@T["Content"]</label>
         <div class="ocat-end">
